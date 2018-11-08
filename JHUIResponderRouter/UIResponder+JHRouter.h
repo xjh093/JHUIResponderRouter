@@ -31,6 +31,35 @@
 
 @interface UIResponder (JHRouter)
 
+ /**
+ if
+ [object respondsToSelector:NSSelectorFromString(selector)]
+ or
+ [selector isEqualToString:@"xxx"]
+ you should do something.
+ 
+ if you override this method, see this example:
+ 
+ @code
+ - (void)jh_routerWithSelector:(NSString *)selector sender:(id)sender info:(NSDictionary *)info{
+    if ([self respondsToSelector:NSSelectorFromString(selector)]){
+        [self performSelector:NSSelectorFromString(selector) withObjects:info];
+    }
+    else if ([selector isEqualToString:@"xxx"]) {
+        // do something with info.
+    }
+    else{
+ 
+        // This is important!!!
+        // if you can't handle it, pass it to nextResponder to handle it.
+ 
+        [self.nextResponder jh_routerWithSelector:selector sender:sender info:info];
+    }
+ }
+ 
+ @endcode
+ 
+ */
 - (void)jh_routerWithSelector:(NSString *)selector
                        sender:(id)sender
                          info:(NSDictionary *)info;

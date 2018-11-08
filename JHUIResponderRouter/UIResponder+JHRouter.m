@@ -31,14 +31,6 @@
 
 @implementation UIResponder (JHRouter)
 
-/*
- if an object respondsToSelector: selector
- [object respondsToSelector:NSSelectorFromString(selector)]
- you should do something.
- 
- invoke [super jh_routerWithSelector:selector sender:sender info:info];
- Let the events continue to pass up
- */
 - (void)jh_routerWithSelector:(NSString *)selector
                        sender:(id)sender
                          info:(NSDictionary *)info
